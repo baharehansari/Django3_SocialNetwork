@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- css only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+    <style>
+        body
+        {
+            background-color: #e9ecef;
+            margin: 0 auto;
+            font-family:'Times New Roman';
+            text-align: center;
+            align-content: center;
+            align-items: center;
+        }
+        .content{
+            padding: 20px;
+            margin: 25px;
+            text-align: center;
+            align-content: center;
+            align-items: center;
+        }
+        .form{
+            color: #d1faf0;
+            font-size: 18px;
+            background-color: #012a4a;
+            align-items: center;
+            align-content: center;
+            padding: 20px;
+            margin: 0 auto;
+            width:400px;
+            text-align-all: center;
+            border-radius: 20px;
+        }
+        .form input{
+            text-align: center;
+            align-content: center;
+            align-items: center;
+            border-radius: 12px;
+        }
+        .form .bts{
+            cursor: pointer;
+            width: 200px;
+            border-radius: 20px;
+            text-align: center;
+            align-content: center;
+            align-items: center;
+        }
+        .navbar-brand
+        {
+            color: #E4DCC7;
+            font-size:18;
+            padding-right:15px;
+            padding-left:15px;
+        }
+        .container-fluid
+        {
+            background-color: #012a4a;
+            padding:10px;
+            width: fit;
+            height: 65px;
+        }
+        .navbar
+        {
+            padding:0px;
+        }
+    </style>
+<body>
+{% include 'include/navbar.html' %}
+<div class="content" >
+    {% include 'include/messages.html' %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

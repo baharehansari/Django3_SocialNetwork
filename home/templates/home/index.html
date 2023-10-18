@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="card-group" style="padding:25px; align-items: center; ">
+    {% for post in posts %}
+        <div class="card" style="width:250px; padding: 20px; text-align: center; align-items: center;">
+            <div class="card-body">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="">
+                <p class="card-text">{{ post.slug }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-secondary">show more</a>
+            </div>
+            <div class="card-footer text-muted">
+                <p>Date Created: {{ post.created|date:"Y-M-D" }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

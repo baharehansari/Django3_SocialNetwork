@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h3>User Login Form:</h3>
+    <form action="" method="post" class="form" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="bts" type="submit" value="Login">
+    </form></br>
+    <a class="btn btn-info" href="{% url 'account:user_register' %}">Register</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Details{% endblock %}
+{% block content %}
+<div class="card-group" style="padding:20px;text-align: center; align-content: center; align-items: center; "">
+        <div class="card" style=" padding: 20px; text-align: center; align-items: center;">
+            <div class="card-body" style=" text-align: justify; align-content: center; align-items: center; "">
+                <p class="card-text" style="font-size: 18px;">{{ post.body }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="" style="align-items: center; width:200px;">
+                <p class="card-text">posted in: {{ post.created }}</p>
+                <p class="card-text">last update: {{ post.updated }}</p>
+                <a href="{% url 'account:user_profile' post.user.id %}" class="btn btn-secondary">other posts of {{ post.user.username }}</a>
+                <a href="{% url 'home:home' %}" class="btn btn-secondary">Back to posts</a>
+                <div><br>
+                    {% if request.user.id == post.user.id %}
+                        <a href="{% url 'home:post_delete' post.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'home:post_update' post.id %}" class="btn btn-primary">Update</a>
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

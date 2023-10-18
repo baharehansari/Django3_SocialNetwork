@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <h3>User Register Form:</h3>
+    <form style="height: 420px; " action="" method="post" class="form" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="bts" type="submit" value="Register">
+    </form></br>
+    <a class="btn btn-info" href="{% url 'account:user_login' %}">Login</a>
+{% endblock %}
