@@ -123,10 +123,5 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = '/account/login/'
 
 # google account (for reset password)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.devba.ir'
-EMAIL_HOST_USER = 'djangosm@devba.ir'
-EMAIL_PORT = 465
-EMAIL_HOST_PASSWORD = '?RYwD8!P$tq='
-EMAIL_USE_TLS = True
+
 

@@ -2,20 +2,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-<div class="card-group" style="padding:25px; align-items: center; ">
-    {% for post in posts %}
-        <div class="card" style="width:250px; padding: 20px; text-align: center; align-items: center;">
-            <div class="card-body">
-                <img src="{{ post.image.url }}" class="card-img-top" alt="">
-                <p class="card-text">{{ post.slug }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-secondary">show more</a>
-            </div>
-            <div class="card-footer text-muted">
-                <p>Date Created: {{ post.created|date:"Y-M-D" }}</p>
-            </div>
-        </div>
-    {% endfor %}
-</div>
+{% for post in posts %}
+<table style="width: 80%; border: solid #e0e0e0; margin:0 auto; padding:15px;">
+<tr>
+    <th style="width:45%;padding: 15px;"><img src="{{ post.image.url }}" class="card-img-top" alt="" style="width: 500px;"></th>
+    <th style="width:35%;"><p class="card-text">{{ post.body|truncatewords:25 }}</p>
+        <br><a href="{{ post.get_absolute_url }}" class="btn btn-secondary">show more</a>
+        <br><p>posted in: {{ post.created }}</p></th>
+</tr>
+</table>
+{% endfor %}
 
 {% endblock %}

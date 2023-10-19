@@ -2,9 +2,9 @@
 {% block title %}Create{% endblock %}
 {% block content %}
     <h3>Create Post:</h3>
-    <form action="" method="post" class="col-md-5" enctype="multipart/form-data" novalidate>
+    <form action="" style="width:500px;" method="post" class="form" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create">
+        <input class="bts" type="submit" value="Create">
     </form>
 {% endblock %}

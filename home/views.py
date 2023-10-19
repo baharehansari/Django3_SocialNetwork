@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+import os
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -19,16 +20,18 @@ class PostDetailView(View):
 
 class PostDeleteView(LoginRequiredMixin,View):
     def get(self, request, post_id):
-        post= get_object_or_404(Post, pk=post_id)
+        post = get_object_or_404(Post, pk=post_id)
         if post.user.id == request.user.id:
             post.delete()
+            if len(post.image) > 0:
+                os.remove(post.image.path)
             messages.success(request, 'post deleted successfully', 'success')
         else:
             messages.error(request, 'you can not delete this post!', 'danger')
         return redirect('home:home')
 
 class PostUpdateView(LoginRequiredMixin, View):
-    form_class= PostCreateUpdateForm
+    form_class= PostUpdateForm
 
     def setup(self, request, *args, **kwargs):
         self.post_instance = Post.objects.get(pk=kwargs['post_id'])
@@ -51,7 +54,7 @@ class PostUpdateView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         post = self.post_instance
-        form = self.form_class(request.POST, request.FILES, instance=post)
+        form = self.form_class(request.POST, instance=post)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.slug = slugify(form.cleaned_data['body'][:30])
@@ -61,7 +64,7 @@ class PostUpdateView(LoginRequiredMixin, View):
 
 
 class PostCreateView(LoginRequiredMixin, View):
-    form_class = PostCreateUpdateForm
+    form_class = PostCreateForm
 
     def get(self, request, *args, **kwargs):
         form = self.form_class
@@ -73,6 +76,9 @@ class PostCreateView(LoginRequiredMixin, View):
             new_post = form.save(commit=False)
             new_post.slug = slugify(form.cleaned_data['body'][:30])
             new_post.user = request.user
+            if len(request.FILES) != 0:
+                new_post.image = request.FILES['image']
+                request.FILES['image'].name = str(request.user) + '.png'
             new_post.save()
             messages.success(request, 'new post added successfully.', 'success')
-            return redirect('home:post_detail', new_post.id, new_post.slug)
+            return redirect('home:post_detail',  new_post.id, new_post.slug)
